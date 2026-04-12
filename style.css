@@ -1,0 +1,432 @@
+:root {
+    --primary-color: #6366f1;
+    --navy: #1e1b4b;
+    --highlight-purple: #9fa8da; /* The specific light purple from the image */
+    --highlight-text: #8b92d8;
+    --sidebar-bg: #0f172a;
+    --text-main: #000000;
+    --text-muted: #333333;
+    --border: #e0e0e0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    background: #f1f5f9;
+    color: var(--text-main);
+    font-size: 12px; /* Base font size matching the PDF look */
+}
+
+.app-container {
+    display: flex;
+}
+
+/* Sidebar Styling (Untouched for fidelity controls) */
+.sidebar {
+    width: 380px;
+    background: var(--sidebar-bg);
+    color: white;
+    padding: 1.5rem;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    overflow-y: auto;
+    border-right: 1px solid rgba(255,255,255,0.1);
+}
+
+.sidebar-header { margin-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem; }
+.sidebar h2 { font-size: 1.25rem; }
+.sidebar p { font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.1em; }
+.control-section { margin-bottom: 1.5rem; }
+.control-section h3 { font-size: 0.7rem; text-transform: uppercase; color: var(--primary-color); margin-bottom: 1rem; }
+.control-group { background: rgba(255,255,255,0.05); padding: 0.75rem; border-radius: 8px; margin-bottom: 1rem; border: 1px solid rgba(255,255,255,0.1); }
+.control-group label { display: block; font-size: 0.65rem; color: #94a3b8; text-transform: uppercase; margin-bottom: 0.4rem; }
+.control-group input, .control-group textarea { width: 100%; background: transparent; border: none; color: white; font-size: 0.9rem; outline: none; }
+.btn-primary { width: 100%; background: var(--primary-color); color: white; border: none; padding: 1rem; border-radius: 8px; font-weight: 700; cursor: pointer; margin-top: 1rem; }
+
+/* Invoice Container */
+.preview-area {
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.invoice-container {
+    width: 8.27in; /* A4 size */
+    min-height: 11.69in;
+    background: white;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    padding: 40px 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-invoice {
+    flex: 1;
+}
+
+/* Header Section */
+.invoice-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 5px;
+}
+
+.vendor-info {
+    max-width: 60%;
+}
+
+.brand-name {
+    font-size: 24px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 4px;
+}
+
+.vendor-info p {
+    font-size: 12px;
+    line-height: 1.4;
+    color: #000;
+}
+
+.logo-container {
+    text-align: right;
+}
+
+.brand-logo {
+    max-height: 60px; /* Shrunk logo to match the PDF */
+    max-width: 150px;
+    object-fit: contain;
+}
+
+/* Tagline / Separator */
+.invoice-tagline-container {
+    border-top: 1px solid var(--highlight-purple);
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    padding-top: 5px;
+}
+
+.invoice-tagline {
+    font-size: 20px;
+    font-weight: normal;
+    color: var(--highlight-text);
+}
+
+/* Billing Details */
+.billing-details {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.bill-to, .invoice-meta {
+    width: 48%;
+}
+
+.bill-to h3, .invoice-meta h3 {
+    font-size: 13px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 8px;
+}
+
+.customer-name {
+    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+.customer-address {
+    font-size: 12px;
+    margin-bottom: 4px;
+    line-height: 1.3;
+}
+
+.customer-contact {
+    font-size: 12px;
+}
+
+/* Invoice Meta Table-like layout */
+.meta-row {
+    font-size: 12px;
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: flex-end; /* Align to right based on image */
+}
+
+.meta-row span:first-child {
+    font-weight: normal;
+    margin-right: 5px;
+}
+
+.meta-row span:last-child {
+    font-weight: bold;
+    min-width: 80px;
+    text-align: left;
+}
+
+/* Table Styling */
+.invoice-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.invoice-table th {
+    background: var(--highlight-purple);
+    color: white;
+    text-align: left;
+    padding: 8px 10px;
+    font-size: 12px;
+    font-weight: normal;
+    white-space: nowrap;
+}
+
+.invoice-table th:last-child {
+    text-align: right;
+}
+
+.invoice-table td {
+    padding: 10px 10px;
+    font-size: 12px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+}
+
+/* Specific Column Alignments to match PDF */
+.invoice-table th:nth-child(3), .invoice-table td:nth-child(3),
+.invoice-table th:nth-child(4), .invoice-table td:nth-child(4),
+.invoice-table th:nth-child(5), .invoice-table td:nth-child(5),
+.invoice-table th:nth-child(6), .invoice-table td:nth-child(6) {
+    text-align: center;
+}
+
+.invoice-table td:last-child {
+    text-align: right;
+}
+
+.invoice-table tfoot td {
+    font-weight: bold;
+    border-bottom: 1px solid #000; /* Darker border for total */
+}
+
+/* Description and Financial Summary Layout */
+.middle-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+/* Left Column formatting */
+.left-col {
+    width: 55%;
+}
+
+.info-block {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    font-size: 12px;
+}
+
+.info-block:last-child {
+    border-bottom: none;
+}
+
+.info-block.desc-block p {
+    margin-bottom: 2px;
+}
+
+.info-block h4 {
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 6px;
+    color: #000;
+}
+
+/* Right Column formatting */
+.right-col {
+    width: 40%;
+}
+
+.financial-summary {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 6px;
+    font-size: 12px;
+    margin-bottom: 2px;
+}
+
+.summary-row span:last-child {
+    font-weight: bold;
+}
+
+.total-highlight {
+    background: var(--highlight-purple);
+    color: white;
+}
+
+/* Bottom Sections (Pay To / Signature) */
+.bottom-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.pay-to-block {
+    font-size: 12px;
+    line-height: 1.5;
+    width: 60%;
+}
+
+.pay-to-block p {
+    margin-bottom: 2px;
+}
+
+.signature-block {
+    width: 35%;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center signature content under "For:" */
+    justify-content: flex-start;
+}
+
+.signature-block p:first-child {
+    align-self: flex-start; /* Align "For:" to left of its flex container */
+    margin-bottom: 10px;
+}
+
+.signature-img {
+    max-width: 120px;
+    margin-bottom: 5px;
+}
+
+.signature-block .owner-text {
+    align-self: center;
+    font-weight: bold;
+}
+
+/* Acknowledgment Section */
+.ack-wrapper {
+    margin-top: auto; /* Push to bottom */
+}
+
+.ack-divider-container {
+    position: relative;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.ack-divider-line {
+    border-top: 1px dashed #ccc;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.ack-divider-text {
+    background: #fff;
+    padding: 0 10px;
+    font-size: 13px;
+    font-weight: bold;
+    position: relative;
+    z-index: 2;
+}
+
+.ack-title {
+    color: var(--highlight-text);
+    text-align: center;
+    font-size: 22px;
+    font-weight: normal;
+    margin-bottom: 20px;
+}
+
+.ack-grid {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    align-items: flex-end; /* Align bottoms for signature line */
+}
+
+.ack-group {
+    width: 32%;
+}
+
+.ack-label {
+    color: var(--highlight-text);
+    font-weight: normal;
+    margin-bottom: 4px;
+    font-size: 12px;
+}
+
+.ack-group p {
+    margin-bottom: 2px;
+    line-height: 1.3;
+}
+
+.seal-sign {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.sign-line {
+    border-top: 2px dotted #666; /* Matching PDF dots */
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+/* Vyapar Footer */
+.vyapar-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 30px;
+}
+
+.vyapar-url {
+    color: #4da6ff; /* Exact light blue */
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.vyapar-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.vyapar-logo small {
+    font-size: 9px;
+    color: #999;
+    margin-bottom: -2px;
+}
+
+.logo-v {
+    height: 35px;
+    object-fit: contain;
+}
+
+@media print {
+    .no-print { display: none; }
+    .preview-area { padding: 0; flex: none; display: block; }
+    .invoice-container { box-shadow: none; width: 100%; padding: 0; min-height: auto; }
+}
